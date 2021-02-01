@@ -14,9 +14,9 @@ export const App = () => {
     const isDelayMode = useSelector(getIsDelayMode);
 
     React.useEffect(() => {
-        let interval: any;
+        let interval: number;
         if (isDelayMode) {
-            interval = setInterval(() => {
+            interval = window.setInterval(() => {
                 let randomTag = getRandomTag();
                 dispatch(getGifs(randomTag));
             }, 5000);
