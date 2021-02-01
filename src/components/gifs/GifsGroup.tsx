@@ -18,9 +18,9 @@ export const GifsGroup: React.FC<GifsGroupPropTypes> = ({gifs, groupName, onGifC
                 {gifs.map(g => {
                     return <Gif onGifClick={() => onGifClick(g.groupName)}
                                 key={g.id}
-                                gif={g}/>
+                                gif={g}/>;
                 })}
             </div>
         </div>
-    )
-}
+    );
+};

@@ -21,7 +21,7 @@ export const GifsContainer: React.FC = () => {
 
     const onGifClick = (tag: string | string[]) => {
         dispatch(actions.setGroupName(tag.toString()));
-    }
+    };
 
     React.useEffect(() => {
         const sortGifs = () => {
@@ -32,14 +32,14 @@ export const GifsContainer: React.FC = () => {
                 acc[gif.groupName].push(gif);
                 return acc;
             }, []);
-            setSortedGifs(sorted)
-        }
+            setSortedGifs(sorted);
+        };
         if (gifs.length && isGroup) {
             sortGifs();
         }
-    }, [gifs, isGroup])
+    }, [gifs, isGroup]);
 
-    if (!gifs.length) return <p>У вас еще нет гифок</p>
+    if (!gifs.length) return <p>У вас еще нет гифок</p>;
 
     return (
         <div>
@@ -59,6 +59,6 @@ export const GifsContainer: React.FC = () => {
                 </div>
             }
         </div>
-    )
-}
+    );
+};
 

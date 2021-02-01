@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {getAlertIsVisible, getAlertMessage, getAlertType} from "../../redux/selectors";
 import React from "react";
-import { actions } from "../../redux/alertReducer";
+import {actions} from "../../redux/alertReducer";
 
 import classes from './Alert.module.scss';
 
@@ -13,16 +13,16 @@ export const Alert: React.FC = () => {
 
     React.useEffect(() => {
         const alertTimeout = setTimeout(() => {
-            dispatch(actions.hideMessage())
+            dispatch(actions.hideMessage());
         }, 3000);
         return () => {
-            clearTimeout(alertTimeout)
-        }
-    },[dispatch, isVisible])
+            clearTimeout(alertTimeout);
+        };
+    },[dispatch, isVisible]);
 
     const modalCloseHandler = () => {
         dispatch(actions.hideMessage());
-    }
+    };
 
     if (!isVisible) return null;
 
@@ -32,5 +32,5 @@ export const Alert: React.FC = () => {
             <span onClick={modalCloseHandler}>&#10060;</span>
             {message}
         </div>
-    )
-}
+    );
+};

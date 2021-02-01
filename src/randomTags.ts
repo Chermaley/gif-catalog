@@ -12,6 +12,5 @@ export const getRandomTag = () => {
         'man', 'graphite', 'elephant'
     ];
     let rand = Math.floor(Math.random() * wordList.length);
-    let tag = wordList[rand];
-    return tag;
-}
+    return wordList[rand];
+};

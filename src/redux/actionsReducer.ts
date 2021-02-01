@@ -10,18 +10,18 @@ const actionsReducer = (state = initialState, action: ActionsType): InitialState
             return {
                 ...state,
                 tag: action.payload
-            }
+            };
         default:
             return state;
     }
-}
+};
 
 export default actionsReducer;
 
 
 export const actions = {
     setGroupName: (payload: string) => ({type: "SET_TAG", payload} as const)
-}
+};
 
 export type InitialStateType = typeof initialState;
 type ActionsType = InferActionsTypes<typeof actions>;

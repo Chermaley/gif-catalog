@@ -1,6 +1,6 @@
 import {InferActionsTypes} from "./store";
 
-type AlertType = 'alert' | 'error';
+
 const initialState = {
     message: '',
     alertType: '' as AlertType,
@@ -26,11 +26,10 @@ const alertReducer = (state = initialState, action: ActionsType): InitialStateTy
     }
 };
 
-
 export const actions = {
     showMessage: (payload: ShowMessagePayloadType) => ({type: "SHOW_MESSAGE", payload} as const),
     hideMessage: () => ({type: "HIDE_MESSAGE"} as const)
-}
+};
 
 export default alertReducer;
 
@@ -41,3 +40,4 @@ type ShowMessagePayloadType = {
 }
 export type InitialStateType = typeof initialState;
 type ActionsType = InferActionsTypes<typeof actions>
+type AlertType = 'alert' | 'error';

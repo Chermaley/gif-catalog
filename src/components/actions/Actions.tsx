@@ -20,25 +20,25 @@ export const Actions: React.FC = () => {
             dispatch(getGifs(tag));
             dispatch(actionsAc.setGroupName(''));
         } else {
-            dispatch(actionsAl.showMessage({alertType: "alert", message: "Заполните поле 'тег'"}))
+            dispatch(actionsAl.showMessage({alertType: "alert", message: "Заполните поле 'тег'"}));
         }
-    }
+    };
 
     const clearButtonHandler = () => {
         dispatch(actionsGif.changeIsDelayMode(false));
         dispatch(actionsAc.setGroupName(''));
         dispatch(actionsGif.clearGif());
-    }
+    };
 
     const isGroupButtonHandler = (isGroup: boolean) => {
         dispatch(actionsGif.changeIsDelayMode(false));
         dispatch(actionsGif.changeIsGroup(isGroup));
-    }
+    };
 
     const tagInputHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const value = e.target.value;
-        dispatch(actionsAc.setGroupName(validateTagInput(value)))
-    }
+        dispatch(actionsAc.setGroupName(validateTagInput(value)));
+    };
 
     return (
         <div className={classes.actions}>
@@ -61,7 +61,7 @@ export const Actions: React.FC = () => {
 
             <button className={classes.btn + ' ' + classes.secondary}
                     onClick={() => {
-                        isGroupButtonHandler(!isGroup)
+                        isGroupButtonHandler(!isGroup);
                     }}>
                 {isGroup ? 'Разгруппировать' : 'Группировать'}
             </button>

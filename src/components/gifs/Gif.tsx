@@ -15,15 +15,15 @@ export const Gif: React.FC<GifPropTypes> = ({onGifClick, gif}) => {
                  className={classes.gif}>
                 <img src={gif.url} alt={gif.groupName}/>
             </div>
-        )
+        );
     }
     return (
-        <div className={classes.someGif}>
+        <div className={classes.someGif} onClick={onGifClick}>
             {gif.url.map(u => {
                 return (
                     <img src={u} key={u} alt={u}/>
-                )
+                );
             })}
         </div>
-    )
-}
+    );
+};

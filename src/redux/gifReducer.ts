@@ -1,6 +1,6 @@
 import {actions as actionsAl} from "./alertReducer";
 import {CommonThunkType, InferActionsTypes} from "./store";
-import {getImageApi} from "../api/api";
+import {getGifsApi} from "../api/api";
 
 const initialState = {
     isLoading: false,
@@ -36,7 +36,7 @@ const imageReducer = (state = initialState, action: ActionsType): InitialStateTy
             return {
                 ...state,
                 isDelayMode: action.payload
-            }
+            };
         default:
             return state;
     }
@@ -48,13 +48,13 @@ export const actions = {
     changeIsLoading: (payload: boolean) => ({type: "CHANGE_IS_LOADING", payload} as const),
     changeIsGroup: (payload: boolean) => ({type: "CHANGE_IS_GROUP", payload} as const),
     changeIsDelayMode: (payload: boolean) => ({type: "CHANGE_IS_DELAY_MODE", payload} as const)
-}
+};
 
 export const getGifs = (tag: string): ThunkType => async (dispatch) => {
     try {
         dispatch(actions.changeIsLoading(true));
         if (tag === 'delay') {
-            dispatch(actionsAl.showMessage({alertType: "alert", message: "Вы запустили DelayMode"}))
+            dispatch(actionsAl.showMessage({alertType: "alert", message: "Включен Delay"}));
             dispatch(actions.changeIsDelayMode(true));
         } else if (!tag.includes(',')) {
             await dispatch(_getOneGif(tag));
@@ -69,7 +69,7 @@ export const getGifs = (tag: string): ThunkType => async (dispatch) => {
 };
 
 const _getOneGif = (tag: string): ThunkType => async (dispatch) => {
-    let response = await getImageApi(tag);
+    let response = await getGifsApi(tag);
 
     if (response.data.image_url) {
         let newGif: GifType = {id: response.data.id, url: response.data.image_url, groupName: tag, isSome: false};
@@ -77,13 +77,13 @@ const _getOneGif = (tag: string): ThunkType => async (dispatch) => {
     } else {
         dispatch(actionsAl.showMessage({message: 'По тегу ничего не найдено', alertType: 'alert'}));
     }
-}
+};
 
 const _getSomeGifs = (tag: string): ThunkType => async (dispatch) => {
     const tagArray = tag.split(',');
 
     let results = await Promise.all(tagArray.map(tag => {
-        return getImageApi(tag);
+        return getGifsApi(tag);
     }));
 
     const isAllGifsFetched = results.every(response => response.data.image_url);
@@ -101,7 +101,7 @@ const _getSomeGifs = (tag: string): ThunkType => async (dispatch) => {
     } else {
         dispatch(actionsAl.showMessage({message: 'По одному из тегов ничего не найдено', alertType: 'alert'}));
     }
-}
+};
 
 export default imageReducer;
 

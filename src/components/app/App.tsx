@@ -22,8 +22,8 @@ export const App = () => {
             }, 1000);
         }
         return () => {
-            clearInterval(interval)
-        }
+            clearInterval(interval);
+        };
     }, [isDelayMode, dispatch]);
 
     return (
@@ -33,5 +33,5 @@ export const App = () => {
             <Alert/>
         </div>
     );
-}
+};
 
