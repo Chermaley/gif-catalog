@@ -1,18 +1,34 @@
 import React, {ChangeEvent} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import {getIsGroup, getIsLoading, getTag} from "../../redux/selectors";
+import {getIsDelayMode, getIsGroup, getIsLoading, getTag} from "../../redux/selectors";
 import {actions as actionsGif, getGifs} from "../../redux/gifReducer";
 import {actions as actionsAc} from "../../redux/actionsReducer";
 import {actions as actionsAl} from "../../redux/alertReducer";
 import {validateTagInput} from "../../utils";
 
 import classes from "./Actions.module.scss";
+import {getRandomTag} from "../../randomTags";
 
 export const Actions: React.FC = () => {
     const tag = useSelector(getTag);
     const isGroup = useSelector(getIsGroup);
     const isLoading = useSelector(getIsLoading);
     const dispatch = useDispatch();
+
+    const isDelayMode = useSelector(getIsDelayMode);
+
+    React.useEffect(() => {
+        let interval: number;
+        if (isDelayMode) {
+            interval = window.setInterval(() => {
+                let randomTag = getRandomTag();
+                dispatch(getGifs(randomTag));
+            }, 5000);
+        }
+        return () => {
+            clearInterval(interval);
+        };
+    }, [isDelayMode, dispatch]);
 
     const loadButtonHandler = () => {
         dispatch(actionsGif.changeIsDelayMode(false));
