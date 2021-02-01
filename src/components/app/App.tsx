@@ -19,7 +19,7 @@ export const App = () => {
             interval = setInterval(() => {
                 let randomTag = getRandomTag();
                 dispatch(getGifs(randomTag));
-            }, 1000);
+            }, 5000);
         }
         return () => {
             clearInterval(interval);
