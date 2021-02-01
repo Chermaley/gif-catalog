@@ -1,12 +1,12 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import {getIsGroup, getIsLoading, getTag} from "../../redux/selectors";
 import {actions as actionsGif, getGifs} from "../../redux/gifReducer";
 import {actions as actionsAc} from "../../redux/actionsReducer";
 import {actions as actionsAl} from "../../redux/alertReducer";
-import {validateTagInput} from '../../utils';
+import {validateTagInput} from "../../utils";
 
-import classes from './Actions.module.scss';
+import classes from "./Actions.module.scss";
 
 export const Actions: React.FC = () => {
     const tag = useSelector(getTag);

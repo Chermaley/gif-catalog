@@ -5,7 +5,7 @@ import {Gif} from "./Gif";
 import {actions} from "../../redux/actionsReducer";
 import {GifsGroup} from "./GifsGroup";
 
-import classes from './Gif.module.scss';
+import classes from "./Gif.module.scss";
 import {GifType} from "../../redux/gifReducer";
 
 type SortedGifsType = {
@@ -25,13 +25,13 @@ export const GifsContainer: React.FC = () => {
 
     React.useEffect(() => {
         const sortGifs = () => {
-            const sorted: SortedGifsType = gifs.reduce((acc: any, gif) => {
+            const sorted = gifs.reduce<SortedGifsType>((acc, gif) => {
                 if (!acc[gif.groupName]) {
                     acc[gif.groupName] = [];
                 }
                 acc[gif.groupName].push(gif);
                 return acc;
-            }, []);
+            }, {});
             setSortedGifs(sorted);
         };
         if (gifs.length && isGroup) {

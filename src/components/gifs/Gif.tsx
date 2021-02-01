@@ -1,7 +1,7 @@
 import {GifType} from "../../redux/gifReducer";
 import React from "react";
 
-import classes from './Gif.module.scss';
+import classes from "./Gif.module.scss";
 
 type GifPropTypes = {
     gif: GifType,

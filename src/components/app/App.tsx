@@ -1,13 +1,13 @@
-import React from 'react';
-import {Actions} from '../actions/Actions';
-import {Alert} from '../alert/Alert';
-import {GifsContainer} from '../gifs/gifsContainer';
+import React from "react";
+import {Actions} from "../actions/Actions";
+import {Alert} from "../alert/Alert";
+import {GifsContainer} from "../gifs/gifsContainer";
 import {getRandomTag} from "../../randomTags";
 import {useDispatch, useSelector} from "react-redux";
-import {getGifs} from '../../redux/gifReducer';
+import {getGifs} from "../../redux/gifReducer";
 import {getIsDelayMode} from "../../redux/selectors";
 
-import './App.scss';
+import "./App.scss";
 
 export const App = () => {
     const dispatch = useDispatch();

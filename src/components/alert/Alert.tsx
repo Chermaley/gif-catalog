@@ -3,7 +3,7 @@ import {getAlertIsVisible, getAlertMessage, getAlertType} from "../../redux/sele
 import React from "react";
 import {actions} from "../../redux/alertReducer";
 
-import classes from './Alert.module.scss';
+import classes from "./Alert.module.scss";
 
 export const Alert: React.FC = () => {
     const dispatch = useDispatch();
