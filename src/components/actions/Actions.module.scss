@@ -1,0 +1,32 @@
+.actions {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.btn {
+  font-size: 16px;
+  height: 40px;
+  margin: 0px 0px 0px 10px;
+  border: 0;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.primary {
+  background-color: seagreen;
+}
+
+.danger {
+  background-color: tomato;
+}
+
+.secondary {
+  background-color: gray;
+}
+
+.input {
+  border-radius: 10px;
+  font-size: 16px;
+  padding: 0 0 0 10px;
+}

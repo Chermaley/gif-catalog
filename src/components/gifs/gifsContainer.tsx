@@ -1,16 +1,19 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getGifs, getIsGroup} from "../../redux/selectors";
-import { Gif } from "./Gif";
+import {Gif} from "./Gif";
 import {actions} from "../../redux/actionsReducer";
 import {GifsGroup} from "./GifsGroup";
 
-type GifsContainerType = {
-    classes: any
+import classes from './Gif.module.scss';
+import {GifType} from "../../redux/gifReducer";
+
+type SortedGifsType = {
+    [groupName: string] : GifType[]
 }
 
-export const GifsContainer: React.FC<GifsContainerType> = ({classes}) => {
-    const [sortedGifs, setSortedGifs] = React.useState({});
+export const GifsContainer: React.FC = () => {
+    const [sortedGifs, setSortedGifs] = React.useState<SortedGifsType>({});
 
     const isGroup = useSelector(getIsGroup);
     const gifs = useSelector(getGifs);
@@ -22,14 +25,14 @@ export const GifsContainer: React.FC<GifsContainerType> = ({classes}) => {
 
     React.useEffect(() => {
         const sortGifs = () => {
-            const sorted = gifs.reduce((acc: any, gif) => {
-                    if (!acc[gif.groupName]) {
-                        acc[gif.groupName] = [];
-                    }
-                    acc[gif.groupName].push(gif);
-                    return acc;
+            const sorted: SortedGifsType = gifs.reduce((acc: any, gif) => {
+                if (!acc[gif.groupName]) {
+                    acc[gif.groupName] = [];
+                }
+                acc[gif.groupName].push(gif);
+                return acc;
             }, []);
-                setSortedGifs(sorted)
+            setSortedGifs(sorted)
         }
         if (gifs.length && isGroup) {
             sortGifs();
@@ -42,18 +45,17 @@ export const GifsContainer: React.FC<GifsContainerType> = ({classes}) => {
         <div>
             {isGroup
                 ? <div>
-                    { Object.keys(sortedGifs).map( (groupName, key) => <GifsGroup
+                    {Object.keys(sortedGifs).map((groupName, key) => <GifsGroup
                         onGifClick={onGifClick}
-                        key = {key}// @ts-ignore
-                        gifs = {sortedGifs[groupName]}
-                        groupName = {groupName}/>) }
+                        key={key}
+                        gifs={sortedGifs[groupName]}
+                        groupName={groupName}/>)}
                 </div>
-                : <div className={classes.gifContainer}>
-                    {gifs.map(g => {
-                        return <Gif onGifClick={() => onGifClick(g.groupName)}
-                                    key={g.id}
-                                    gif={g}/>
-                    })}
+                : <div className={classes.container}>
+                    {gifs.map(g => <Gif onGifClick={() => onGifClick(g.groupName)}
+                                        key={g.id}
+                                        gif={g}/>
+                    )}
                 </div>
             }
         </div>
